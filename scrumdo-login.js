@@ -23,8 +23,8 @@ describe('Scrumdo', function() {
 			expect(element(by.css('.pull-right')).getText()).toEqual('Create New Organization');
 			console.log('User logged in Successfully!');
 		},function(){
-			expect(element(by.css('.alert-error strong')).getText()).toEqual('The username and/or password you specified are not correct.');
-			console.log('Login error!');
+			expect(element(by.css('.alert-error strong')).getText());
+			console.log('Wrong username or password!');
 		});
 	});
 	
@@ -38,7 +38,7 @@ describe('Scrumdo', function() {
 		},function(){});
 		
 		element(by.css('.alert-error strong')).then(function(attr){
-			expect(element(by.css('.alert-error strong')).getText()).toEqual('The username and/or password you specified are not correct.');
+			expect(element(by.css('.alert-error')).getText());
 			console.log('Wrong username or password!');
 		},function(){
 			
