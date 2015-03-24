@@ -11,8 +11,8 @@ describe('Scrumdo', function() {
     });
 	
 	it('user should able to login', function() {
-		element(by.name('username')).sendKeys('ajay');
-		element(by.name('password')).sendKeys('klug');
+		element(by.name('username')).sendKeys('test');
+		element(by.name('password')).sendKeys('test');
 		element(by.css('.scrumdo-btn')).click();
 		
 		element(by.css('.btn-primary')).then(function(){
