@@ -1,7 +1,7 @@
 // login scenario
 var cred = {
 	LOGINURL : 'http://integration.scrumdo.com/account/login/',
-	USERNAME : 'ajay',
+	USERNAME : 'ajay1',
 	PASSWORD : 'klug'
 }
 describe('Scrumdo', function() {
@@ -21,6 +21,7 @@ describe('Scrumdo', function() {
 			expect(element(by.css('.pull-right')).getText()).toEqual('Create New Organization');
 			console.log('User logged in Successfully!');
 		},function(){
+			expect(element(by.css('.alert-error strong')).getText()).toEqual('The username and/or password you specified are not correct.');
 			console.log('Login error!');
 		});
 	});
