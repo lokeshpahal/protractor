@@ -1,8 +1,8 @@
 // login scenario
 var cred = {
 	LOGINURL : 'http://integration.scrumdo.com/account/login/',
-	USERNAME : 'ajay1',
-	PASSWORD : 'klug'
+	USERNAME : 'username',
+	PASSWORD : 'password'
 }
 describe('Scrumdo', function() {
 	it('user should able to login', function() {
