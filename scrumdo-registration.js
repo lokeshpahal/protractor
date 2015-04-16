@@ -2,58 +2,76 @@
 var param = {
 	registrationUrl : 'https://app.scrumdo.com/account/signup/',
 	loginUrl : 'https://app.scrumdo.com/account/login/',
-	userName: 'test13',
+	userName: 'test23',
 	fullName: 'test Name',
-	email: '',
+	email: 'test@test.com',
 	password: 'test',
 	registerd: false,
-	loggedIn: false
+	loggedIn: false,
+	organizationName: 'My Organization',
+	projectName: 'My Project'
 }
 describe('Scrumdo', function() {
 	
 	beforeEach(function() {
-		if(param.loggedIn==false && param.registerd==false){
-			browser.get(param.registrationUrl);
-			browser.driver.manage().deleteAllCookies();
-			browser.driver.manage().window().maximize();
-		}
-		if(param.registerd==true && param.loggedIn==false){
-			browser.get(param.loginUrl);
-			browser.driver.manage().deleteAllCookies();
-		}
+		browser.driver.manage().window().maximize();
     });
 	
 	//Case: Successfull Registration
 	it('Successfull Registration', function() {
+		browser.get(param.registrationUrl);
 		element(by.name('username')).sendKeys(param.userName);
 		element(by.name('fullname')).sendKeys(param.fullName);
 		element(by.name('email')).sendKeys(param.email);
 		element(by.name('password')).sendKeys(param.password);
-		element(by.css('.btn-primary')).then(function(){
-			element(by.css('.scrumdo-btn')).click();
-		},function(){});
-		
+		element(by.css('.scrumdo-btn')).click().then(function(){
+			param.registerd=true;
+		});
 		
 	});
 	
-	//Case: Successfull Login
-	it('Successfull Login', function() {
-		element(by.name('username')).sendKeys(param.userName);
-		element(by.name('password')).sendKeys(param.password);
-		element(by.css('.scrumdo-btn')).click();
-		
-		element(by.css('.btn-primary')).then(function(){
-			element(by.css('.scrumdo-btn')).click();
+	//Case: Setup Organization
+	it('Setup Organization',function(){
+		element(by.css('.scrumdo-signup-title')).then(function(){
+			element(by.name('organization_name')).sendKeys(param.organizationName);
+			element.all(by.css('.scrumdo-btn')).filter(function(elem) {
+				return elem.isDisplayed(); 
+			}).click();
+			
+			element(by.name('project_name')).sendKeys(param.projectName);
+			element.all(by.css('.scrumdo-btn')).filter(function(elem) {
+				return elem.isDisplayed(); 
+			}).click();
+			
+			element.all(by.css('.scrumdo-btn')).filter(function(elem) {
+				return elem.isDisplayed(); 
+			}).click();
 		},function(){});
-		
-		element(by.css('.nav-settings .dropdown-menu')).then(function(attr){
-			param.loggedIn = true;
-			//expect(element(by.css('.nav-settings .dropdown-menu li:nth-child(2) a')).getText()).toEqual('Account Settings');
-			console.log('User logged in Successfully!');
-		},function(){
-			expect(element(by.css('.alert-error strong')).getText());
-			console.log('Wrong username or password!');
-		});
 	});
+	
+	//Case: Setup Project
+	it('Setup Project',function(){
+		element(by.css('.overview-project-link')).click();
+	});
+	it('Setup Project step2',function(){
+		element.all(by.buttonText('Board Wizard')).filter(function(elem) {
+			return elem.isDisplayed(); 
+		}).click();
+		element.all(by.buttonText('Next')).filter(function(elem) {
+			return elem.isDisplayed(); 
+		}).click();
+		element.all(by.buttonText('Next')).filter(function(elem) {
+			return elem.isDisplayed(); 
+		}).click();
+		element.all(by.buttonText('Done')).filter(function(elem) {
+			return elem.isDisplayed(); 
+		}).click();
+		
+	});
+	it('Setup Project step3',function(){
+		element.all(by.css('.scrumdo-column-title')).first().element(by.tagName('button')).click();
+		element.all(by.css('.scrumdo-column-title')).first().element(by.css('.dropdown-menu li')).first().click();
+	});
+	
 	
 });
