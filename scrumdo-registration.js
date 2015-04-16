@@ -2,7 +2,7 @@
 var param = {
 	registrationUrl : 'https://app.scrumdo.com/account/signup/',
 	loginUrl : 'https://app.scrumdo.com/account/login/',
-	userName: 'test23',
+	userName: 'test28',
 	fullName: 'test Name',
 	email: 'test@test.com',
 	password: 'test',
@@ -69,8 +69,8 @@ describe('Scrumdo', function() {
 		
 	});
 	it('Setup Project step3',function(){
-		element.all(by.css('.scrumdo-column-title')).first().element(by.tagName('button')).click();
-		element.all(by.css('.scrumdo-column-title')).first().element(by.css('.dropdown-menu li')).first().click();
+		//element.all(by.css('.scrumdo-column-title')).get(0).element(by.tagName('button')).click();
+		//element.all(by.css('.scrumdo-column-title')).get(0).element(by.css('.dropdown-menu li')).get(0).click();
 	});
 	
 	
