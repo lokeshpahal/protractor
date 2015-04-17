@@ -2,7 +2,7 @@
 var param = {
 	registrationUrl : 'https://app.scrumdo.com/account/signup/',
 	loginUrl : 'https://app.scrumdo.com/account/login/',
-	userName: 'test30',
+	userName: 'test32',
 	fullName: 'test Name',
 	email: 'test@test.com',
 	password: 'test',
@@ -24,14 +24,13 @@ describe('Scrumdo', function() {
 		element(by.name('fullname')).sendKeys(param.fullName);
 		element(by.name('email')).sendKeys(param.email);
 		element(by.name('password')).sendKeys(param.password);
-		element(by.css('.scrumdo-btn')).click().then(function(){
-			param.registerd=true;
-		});
+		element(by.css('.scrumdo-btn')).click().then(function(){});
 		
 	});
 	
 	//Case: Setup Organization
 	it('Setup Organization',function(){
+		console.log('Registration Successful');
 		element(by.css('.scrumdo-signup-title')).then(function(){
 			element(by.name('organization_name')).sendKeys(param.organizationName);
 			element.all(by.css('.scrumdo-btn')).filter(function(elem) {
@@ -51,9 +50,13 @@ describe('Scrumdo', function() {
 	
 	//Case: Setup Project
 	it('Setup Project',function(){
+		expect(element(by.css('.overview-project-link')).getText()).toEqual(param.projectName).then(function(){
+			console.log('Project Created Successfully');
+		});
 		element(by.css('.overview-project-link')).click();
 	});
 	it('Setup Project step2',function(){
+		console.log('Running Project Setup Wizard');
 		element.all(by.buttonText('Board Wizard')).filter(function(elem) {
 			return elem.isDisplayed(); 
 		}).click();
@@ -76,6 +79,7 @@ describe('Scrumdo', function() {
 		element(by.css('.overview-project-link')).click();
 	});
 	it('Setup Story step2',function(){
+		browser.waitForAngular();
 		element.all(by.css('.scrumdo-column-title')).get(0).element(by.tagName('button')).click();
 		element.all(by.css('.scrumdo-column-title')).get(0).element(by.css('.dropdown-menu li')).get(0).click();
 	})
