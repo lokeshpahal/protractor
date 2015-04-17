@@ -14,7 +14,7 @@ describe('Scrumdo', function() {
 		browser.driver.manage().window().maximize();
     });
 	
-	//Case: Registration
+	//**************************************** Case: Registration **************************************/
 	it('Successfull Registration', function() {
 		browser.get(param.registrationUrl);
 		element(by.name('username')).sendKeys(param.userName);
@@ -24,7 +24,7 @@ describe('Scrumdo', function() {
 		element(by.css('.scrumdo-btn')).click().then(function(){});
 	});
 	
-	//Case: Setup Organization
+	//****************************************** Case: Setup Organization ****************************************/
 	it('Setup Organization',function(){
 		console.log('Registration Successful');
 		element(by.css('.scrumdo-signup-title')).then(function(){
@@ -44,7 +44,7 @@ describe('Scrumdo', function() {
 		},function(){});
 	});
 	
-	//Case: Setup Project
+	//********************************************************* Case: Setup Project ***************************************/
 	it('Setup Project',function(){
 		expect(element(by.css('.overview-project-link')).getText()).toEqual(param.projectName).then(function(){
 			console.log('Project Created Successfully');
@@ -69,4 +69,11 @@ describe('Scrumdo', function() {
 		}).click();
 	});
 	
+	//****************************** Case: Logout ************************************/
+	it('Logout',function(){
+		element.all(by.css('.nav-settings a')).get(0).click().then(function(){
+			element.all(by.css('.nav-settings .dropdown-menu li')).get(6).element(by.tagName('a')).click();
+			expect(element.all(by.css('.nav-settings .dropdown-menu li')).isPresent()).toBe(false);
+		});
+	});
 });
