@@ -1,13 +1,10 @@
-// login scenario
+// Create Account scenario
 var param = {
 	registrationUrl : 'https://app.scrumdo.com/account/signup/',
-	loginUrl : 'https://app.scrumdo.com/account/login/',
 	userName: 'test32',
 	fullName: 'test Name',
 	email: 'test@test.com',
 	password: 'test',
-	registerd: false,
-	loggedIn: false,
 	organizationName: 'My Organization',
 	projectName: 'My Project'
 }
@@ -17,7 +14,7 @@ describe('Scrumdo', function() {
 		browser.driver.manage().window().maximize();
     });
 	
-	//Case: Successfull Registration
+	//Case: Registration
 	it('Successfull Registration', function() {
 		browser.get(param.registrationUrl);
 		element(by.name('username')).sendKeys(param.userName);
@@ -25,7 +22,6 @@ describe('Scrumdo', function() {
 		element(by.name('email')).sendKeys(param.email);
 		element(by.name('password')).sendKeys(param.password);
 		element(by.css('.scrumdo-btn')).click().then(function(){});
-		
 	});
 	
 	//Case: Setup Organization
@@ -72,17 +68,5 @@ describe('Scrumdo', function() {
 			return elem.isDisplayed(); 
 		}).click();
 	});
-	
-	//Case Setup Story
-	it('Setup Story',function(){
-		browser.get('https://app.scrumdo.com');
-		element(by.css('.overview-project-link')).click();
-	});
-	it('Setup Story step2',function(){
-		browser.waitForAngular();
-		element.all(by.css('.scrumdo-column-title')).get(0).element(by.tagName('button')).click();
-		element.all(by.css('.scrumdo-column-title')).get(0).element(by.css('.dropdown-menu li')).get(0).click();
-	})
-	
 	
 });
